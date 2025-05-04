@@ -1,6 +1,6 @@
 //Importando dependências
     const Sequelize = require('sequelize');
-    const database = require('../database');
+    const database = require('../database/database');
 
 //Criação do modelo
     const Pombo = database.define('pombo', {
@@ -24,7 +24,7 @@
         },
         type: {
             type: Sequelize.STRING,
-            allowNull: false
+            allowNull: true
         },
         photo: {
             type: Sequelize.BLOB,

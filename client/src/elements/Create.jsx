@@ -1,41 +1,77 @@
-import React, {useState} from 'react'
+//Importando dependências do projeto
+    import React, {useEffect, useState} from 'react'
+    import axios from 'axios'
+    import {Link, useNavigate} from 'react-router-dom'
 
-function Create() {
-    const [values, setValues] = useState({
-        name: '',
-        age: 0,
-        uf: '',
-        type: '',
-        photo: '../../imgs/default-avatar-icon-of-social-media-user-vector.jpg'
-    })
+//Configurando valores padrões do Forms
+    function Create() {
+        const navigate = useNavigate();
+        const [estados, setEstados] = useState([]);
+        const [values, setValues] = useState({
+            txtName: '',
+            txtAge: 0,
+            cmbUF: '0',
+            txtType: 'Indefinido',
+            txtPhoto: '../../imgs/default-avatar-icon-of-social-media-user-vector.jpg'
+        })
 
-    function handleSubmit(event){
-        
+//Redirecionamento à rota de cadastro
+
+    function handleInputChange (event) {
+        values[event.target.name] = event.target.value;
+        setValues(values);
     }
+
+    function handleFormSubmit(event){
+        event.preventDefault();
+        axios.post('http://localhost:3001/add_user', values).then(
+            alert(`Usuário cadastrado com sucesso!`),
+            navigate('/read')
+        )
+    }
+
+//Configurando API do IBGE
+    useEffect(() => {
+            axios.get('https://servicodados.ibge.gov.br/api/v1/localidades/estados').then(res => {
+                setEstados(res.data);
+            })
+        }, [])
+
+//Forms
   return (
     <div className='container vh-100 vw-100 bg-primary'>
         <div className='row'>
             <h3>Cadastrar Pombo</h3>
-            <form onSubmit={handleSubmit}>
+            <div className='d-flex justify-content-end'>
+                <Link to='/read' className='btn btn-success'>Pombos cadastrados</Link>
+            </div>
+            <form onSubmit={handleFormSubmit} action="">
                 <div className='form-group my-3'>
-                    <label htmlFor="name">name</label>
-                    <input type="text" name='name' required onChange={(event)=> setValues({...values, name: event.target.value})}/>
+                    <label>Nome</label>
+                    <input type="text" name='txtName' required onChange={handleInputChange}/>
                 </div>
                 <div className='form-group my-3'>
-                    <label htmlFor="name">age</label>
-                    <input type="number" name='age' required onChange={(event)=> setValues({...values, age: event.target.value})}/>
+                    <label>Idade</label>
+                    <input type="number" name='txtAge' required onChange={handleInputChange}/>
                 </div>
                 <div className='form-group my-3'>
-                    <label htmlFor="uf">uf</label>
-                    <input type="text" name='uf' required onChange={(event)=> setValues({...values, uf: event.target.value})}/>
+                    <label>UF:
+                        <select name="cmbUF" id="cmbUF" required onChange={handleInputChange}>
+                            <option value="0">Selecione uma opção</option>
+                            {estados.map(estado => (<option key={estado.sigla} value={estado.sigla}>{estado.sigla}</option>))}
+                        </select>
+                    </label>
                 </div>
                 <div className='form-group my-3'>
-                    <label htmlFor="type">Name</label>
-                    <input type="text" name='type' required onChange={(event)=> setValues({...values, type: event.target.value})}/>
+                    <label>Tipo</label>
+                    <input type="text" name='txtType' onChange={handleInputChange}/>
                 </div>
                 <div className='form-group my-3'>
-                    <label htmlFor="photo">Name</label>
-                    <input type="file" name='photo' onChange={(event)=> setValues({...values, photo: event.target.value})}/>
+                    <label>Photo</label>
+                    <input type="file" name='txtPhoto' onChange={handleInputChange}/>
+                </div>
+                <div className='form-group my-3'>
+                    <input type="submit" value="Salvar" className='btn btn-success'/>
                 </div>
             </form>
         </div>

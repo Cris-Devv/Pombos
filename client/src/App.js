@@ -6,7 +6,7 @@
   import Create from './elements/Create';
   import Read from './elements/Read';
   import Update from './elements/Update';
-  import Delete from './elements/Delete';
+  import Details from './elements/Details';
 
 //Aplicação
   function App() {
@@ -17,7 +17,7 @@
           <Route path='/create' element={<Create/>}/>
           <Route path='/read' element={<Read/>}/>
           <Route path='/update/:id' element={<Update/>}/>
-          <Route path='/delete/:id' element={<Delete/>}/>
+          <Route path='/detail/:id' element={<Details/>}/>
         </Routes>
       </BrowserRouter>
     )

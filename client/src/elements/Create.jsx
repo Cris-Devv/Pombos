@@ -24,7 +24,7 @@
 
     function handleFormSubmit(event){
         event.preventDefault();
-        axios.post('http://localhost:3001/add_user', values).then(
+        axios.post('http://localhost:3001/add_pombo', values).then(
             alert(`Usuário cadastrado com sucesso!`),
             navigate('/read')
         )
@@ -39,19 +39,19 @@
 
 //Forms
   return (
-    <div className='container vh-100 vw-100 bg-primary'>
+    <div className='container-fluid bg-primary vh-100 vw-100'>
         <div className='row'>
-            <h3>Cadastrar Pombo</h3>
+            <h1>Cadastrar Pombo</h1>
             <div className='d-flex justify-content-end'>
                 <Link to='/read' className='btn btn-success'>Pombos cadastrados</Link>
             </div>
             <form onSubmit={handleFormSubmit} action="">
                 <div className='form-group my-3'>
-                    <label>Nome</label>
+                    <label>Nome: </label>
                     <input type="text" name='txtName' required onChange={handleInputChange}/>
                 </div>
                 <div className='form-group my-3'>
-                    <label>Idade</label>
+                    <label>Idade: </label>
                     <input type="number" name='txtAge' required onChange={handleInputChange}/>
                 </div>
                 <div className='form-group my-3'>
@@ -63,11 +63,11 @@
                     </label>
                 </div>
                 <div className='form-group my-3'>
-                    <label>Tipo</label>
+                    <label>Tipo: </label>
                     <input type="text" name='txtType' onChange={handleInputChange}/>
                 </div>
                 <div className='form-group my-3'>
-                    <label>Photo</label>
+                    <label>Photo: </label>
                     <input type="file" name='txtPhoto' onChange={handleInputChange}/>
                 </div>
                 <div className='form-group my-3'>

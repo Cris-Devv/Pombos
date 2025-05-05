@@ -12,11 +12,43 @@
     app.use(express.static(path.join(__dirname, "public")));
 
 //Rotas    
-    app.post('/add_user', (req, res, next) => {
+
+    app.get('/pombos', (req, res, next) => {
+        (async () => {
+            try{
+                const connect = await database.sync();
+                console.log('Conectado com sucesso!');
+
+                const userRead = await Pombo.findAll();
+                res.json(userRead);
+                console.log('Pombos lidos com sucesso')
+            } catch(err){
+                console.log(err);
+            }
+        })();
+    })
+
+    app.get('/get_pombo/:id', (req, res, next) => {
+        (async () => {
+            try{
+                // const id = req.params.id;
+                const connect = await database.sync();
+                console.log('Conectado com sucesso!');
+
+                const userDetails = await Pombo.findAll({where: {id: req.params.id}});
+                res.json(userDetails);
+                console.log('Pombos lidos com sucesso')
+            } catch(err){
+                console.log(err);
+            }
+        })();
+    })
+    
+    app.post('/add_pombo', (req, res, next) => {
         (async () => {
             try {
                 const connect = await database.sync();
-                console.log('batata');
+                console.log('Conectado com sucesso!');
 
                 const userCreate = await Pombo.create({
                     name: req.body.txtName,
@@ -25,7 +57,7 @@
                     type: req.body.txtType,
                     photo: req.body.txtPhoto
                 })
-                console.log("Deu boa");
+                console.log("Pombo adicionado com sucesso");
 
             } catch (err) {
                 console.log(err);

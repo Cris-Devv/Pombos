@@ -1,33 +1,22 @@
 //Importando dependências do projeto
-import React, { useEffect, useState } from 'react'
-import axios from 'axios'
-import { Link, useNavigate } from 'react-router-dom'
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
+import { Link, useNavigate } from 'react-router-dom';
+import { Formik, Field, Form } from 'formik';
+import * as Yup from 'yup';
+import { ErrorMessage } from 'formik';
+
+//Criando esquema de validação
+const validationSchema = Yup.object().shape({
+    txtName: Yup.string().required('Insira o nome do pombo'),
+    txtAge: Yup.string().required('Insira a idade do pombo'),
+    cmbUF: Yup.string().required('Insira a localização do pombo')
+})
 
 //Configurando valores padrões do Forms
 function Create() {
     const navigate = useNavigate();
     const [estados, setEstados] = useState([]);
-    const [values, setValues] = useState({
-        txtName: '',
-        txtAge: 0,
-        cmbUF: '0',
-        txtType: 'Indefinido',
-        txtPhoto: '../../imgs/default-avatar-icon-of-social-media-user-vector.jpg'
-    })
-
-//Redirecionamento à rota de cadastro
-    function handleInputChange(event) {
-        values[event.target.name] = event.target.value;
-        setValues(values);
-    }
-
-    function handleFormSubmit(event) {
-        event.preventDefault();
-        axios.post('http://localhost:3001/add_pombo', values).then(
-            alert(`Pombo cadastrado com sucesso!`),
-            navigate('/read')
-        )
-    }
 
 //Configurando API do IBGE
     useEffect(() => {
@@ -40,39 +29,62 @@ function Create() {
     return (
         <div className='container-fluid bg-primary vh-100 vw-100'>
             <div className='row'>
-                <h1>Cadastrar Pombo</h1>
+                <center><h1>Cadastrar Pombo</h1></center>
                 <div className='d-flex justify-content-end'>
                     <Link to='/read' className='btn btn-success'>Pombos cadastrados</Link>
                 </div>
-                <form onSubmit={handleFormSubmit}>
-                    <div className='form-group my-3'>
-                        <label>Nome: </label>
-                        <input type="text" name='txtName' required onChange={handleInputChange} />
-                    </div>
-                    <div className='form-group my-3'>
-                        <label>Idade: </label>
-                        <input type="number" name='txtAge' required onChange={handleInputChange} />
-                    </div>
-                    <div className='form-group my-3'>
-                        <label>UF:
-                            <select name="cmbUF" id="cmbUF" required onChange={handleInputChange}>
-                                <option value="0">Selecione uma opção</option>
-                                {estados.map(estado => (<option key={estado.sigla} value={estado.sigla}>{estado.sigla}</option>))}
-                            </select>
-                        </label>
-                    </div>
-                    <div className='form-group my-3'>
-                        <label>Tipo: </label>
-                        <input type="text" name='txtType' onChange={handleInputChange} />
-                    </div>
-                    <div className='form-group my-3'>
-                        <label>Photo: </label>
-                        <input type="file" name='txtPhoto' onChange={handleInputChange} />
-                    </div>
-                    <div className='form-group my-3'>
-                        <input type="submit" value="Salvar" className='btn btn-success' />
-                    </div>
-                </form>
+                <Formik
+                    initialValues={{
+                        txtName: '',
+                        txtAge: '',
+                        cmbUF: '',
+                        txtType: '',
+                        txtPhoto: '../../imgs/default-avatar-icon-of-social-media-user-vector.jpg'
+                    }}
+                    onSubmit={values => {
+                        axios.post('http://localhost:3001/add_pombo', values).then(
+                            alert(`Pombo cadastrado com sucesso!`),
+                            navigate('/read')
+                        ).catch((err) => {
+                            alert("Algo deu errado.");
+                        })
+                    }}
+                    validationSchema={validationSchema}
+                    >
+                        {({handleSubmit}) => (
+                    <Form onSubmit={handleSubmit}>
+                        <div className='form-group my-3'>
+                            <label>*Nome: </label>
+                            <Field type="text" name="txtName"></Field>
+                            <ErrorMessage name="txtName" component="div" className="error"></ErrorMessage>
+                        </div>
+                        <div className='form-group my-3'>
+                            <label>*Idade: </label>
+                            <Field type="number" name="txtAge"></Field>
+                            <ErrorMessage name="txtAge" component="div" className="error"></ErrorMessage>
+                        </div>
+                        <div className='form-group my-3'>
+                            <label>*UF: </label>
+                                <Field as="select" name="cmbUF">
+                                    <option value="0">Selecione uma opção</option>
+                                    {estados.map(estado => (<option key={estado.sigla} value={estado.sigla}>{estado.sigla}</option>))}
+                                </Field>
+                                <ErrorMessage name="cmbUF" component="div" className="error"></ErrorMessage>
+                        </div>
+                        <div className='form-group my-3'>
+                            <label>Tipo: </label>
+                            <Field type="text" name="txtType"></Field>
+                        </div>
+                        <div className='form-group my-3'>
+                            <label>Photo: </label>
+                            <Field type="file" name="txtphoto"></Field>
+                        </div>
+                        <div className='form-group my-3'>
+                            <button type="submit" className='btn btn-success'>Cadastrar</button>
+                        </div>
+                    </Form>
+                    )}
+                </Formik>
             </div>
         </div>
     )

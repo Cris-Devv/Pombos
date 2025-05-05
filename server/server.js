@@ -12,38 +12,6 @@
     app.use(express.static(path.join(__dirname, "public")));
 
 //Rotas    
-
-    app.get('/pombos', (req, res, next) => {
-        (async () => {
-            try{
-                const connect = await database.sync();
-                console.log('Conectado com sucesso!');
-
-                const pomboRead = await Pombo.findAll();
-                res.json(pomboRead);
-                console.log('Pombos lidos com sucesso')
-            } catch(err){
-                console.log(err);
-            }
-        })();
-    })
-
-    app.get('/get_pombo/:id', (req, res, next) => {
-        (async () => {
-            try{
-                // const id = req.params.id;
-                const connect = await database.sync();
-                console.log('Conectado com sucesso!');
-
-                const pomboDetails = await Pombo.findAll({where: {id: req.params.id}});
-                res.json(pomboDetails);
-                console.log('Pombos lidos com sucesso')
-            } catch(err){
-                console.log(err);
-            }
-        })();
-    })
-    
     app.post('/add_pombo', (req, res, next) => {
         (async () => {
             try {
@@ -65,7 +33,37 @@
         })();
     })
 
-    app.post('/update_pombo/:id', (req, res, next) => {
+    app.get('/pombos', (req, res, next) => {
+        (async () => {
+            try{
+                const connect = await database.sync();
+                console.log('Conectado com sucesso!');
+
+                const pomboRead = await Pombo.findAll();
+                res.json(pomboRead);
+                console.log('Pombos lidos com sucesso')
+            } catch(err){
+                console.log(err);
+            }
+        })();
+    })
+
+    app.get('/get_pombo/:id', (req, res, next) => {
+        (async () => {
+            try{
+                const connect = await database.sync();
+                console.log('Conectado com sucesso!');
+
+                const pomboDetails = await Pombo.findAll({where: {id: req.params.id}});
+                res.json(pomboDetails);
+                console.log('Pombos lidos com sucesso')
+            } catch(err){
+                console.log(err);
+            }
+        })();
+    })
+
+    app.put('/update_pombo/:id', (req, res, next) => {
         (async () => {
             try {
                 const connect = await database.sync();
@@ -81,6 +79,16 @@
             } catch (err) {
                 console.log(err);
             }
+        })();
+    })
+
+    app.delete('/delete/:id', (req, res, next) => {
+        (async() => {
+            const connect = await database.sync();
+            console.log('Conectado com sucesso!');
+
+            const pomboDelete = await Pombo.destroy({where: {id: req.params.id}})
+            console.log("Pombo deletado com sucesso!")
         })();
     })
 

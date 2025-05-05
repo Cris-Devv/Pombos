@@ -7,13 +7,13 @@ function Update() {
   const [estados, setEstados] = useState([]);
   const [data, setData] = useState([]);
   const { id } = useParams();
-  
+
   useEffect(() => {
     axios.get(`http://localhost:3001/get_pombo/${id}`).then((res) => {
       setData(res.data);
     })
       .catch((err) => {
-        console.log(err);
+        alert("Algo deu errado.")
       })
   }, [id])
 
@@ -30,18 +30,19 @@ function Update() {
 
   function handleFormSubmit(event) {
     event.preventDefault();
-    axios.post(`http://localhost:3001/update_pombo/${id}`, data[0]).then(
+    axios.put(`http://localhost:3001/update_pombo/${id}`, data[0]).then(
       alert(`Pombo atualizado com sucesso!`),
       navigate('/read')
-  ).catch((err)=>console.log(err))
+  ).catch((err)=>alert("Algo deu errado."))
   }
 
   return (
     <div className='container-fluid bg-primary vh-100 vw-100'>
-      <Link className='btn btn-success' to='/read'>Voltar</Link>
-      <h1>Editando pombo {id}</h1>
       {data.map((pombo) => {
         return (
+          <div>
+            <Link className='btn btn-success' to='/read'>Voltar</Link>
+            <center><h1>Editando pombo {id}</h1></center>
           <form onSubmit={handleFormSubmit}>
             <div className='form-group my-3'>
               <label>Nome: </label>
@@ -104,6 +105,7 @@ function Update() {
               />
             </div>
           </form>
+          </div>
         )
       })}
     </div>

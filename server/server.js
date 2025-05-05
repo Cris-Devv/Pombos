@@ -19,8 +19,8 @@
                 const connect = await database.sync();
                 console.log('Conectado com sucesso!');
 
-                const userRead = await Pombo.findAll();
-                res.json(userRead);
+                const pomboRead = await Pombo.findAll();
+                res.json(pomboRead);
                 console.log('Pombos lidos com sucesso')
             } catch(err){
                 console.log(err);
@@ -35,8 +35,8 @@
                 const connect = await database.sync();
                 console.log('Conectado com sucesso!');
 
-                const userDetails = await Pombo.findAll({where: {id: req.params.id}});
-                res.json(userDetails);
+                const pomboDetails = await Pombo.findAll({where: {id: req.params.id}});
+                res.json(pomboDetails);
                 console.log('Pombos lidos com sucesso')
             } catch(err){
                 console.log(err);
@@ -50,7 +50,7 @@
                 const connect = await database.sync();
                 console.log('Conectado com sucesso!');
 
-                const userCreate = await Pombo.create({
+                const pomboCreate = await Pombo.create({
                     name: req.body.txtName,
                     age: parseInt(req.body.txtAge),
                     uf: req.body.cmbUF,
@@ -59,6 +59,25 @@
                 })
                 console.log("Pombo adicionado com sucesso");
 
+            } catch (err) {
+                console.log(err);
+            }
+        })();
+    })
+
+    app.post('/update_pombo/:id', (req, res, next) => {
+        (async () => {
+            try {
+                const connect = await database.sync();
+                console.log('Conectado com sucesso!');
+
+                const {id} = req.params;
+                const {name, age, uf, type, photo} = req.body;
+                const pomboUpdate = await Pombo.update(
+                    {name, age, uf, type, photo}, 
+                    {where: {id: id,},
+                });
+                console.log("Pombo atualizado com sucesso!");
             } catch (err) {
                 console.log(err);
             }

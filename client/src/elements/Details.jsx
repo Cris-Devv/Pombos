@@ -42,10 +42,10 @@ function Details() {
               <b>Tipo: </b>
               {pombo['type']}
             </li>
-            <li className='list-group-item'>
-              <b>Foto: </b>
-              {pombo['photo']}
-            </li>
+            {/* <li className='list-group-item'>
+        <b>Foto: </b>
+        {pombo['photo']}
+      </li> */}
           </ul>
         );
       })}

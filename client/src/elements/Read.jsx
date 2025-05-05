@@ -27,8 +27,6 @@ function Read() {
             <th>Nome: </th>
             <th>Idade: </th>
             <th>UF: </th>
-            <th>Tipo: </th>
-            <th>Foto: </th>
           </tr>
         </thead>
         <tbody>

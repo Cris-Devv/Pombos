@@ -1,6 +1,16 @@
-import React, { useEffect, useState } from 'react'
-import axios from 'axios'
-import { Link, useParams, useNavigate } from 'react-router-dom'
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
+import { Link, useParams, useNavigate } from 'react-router-dom';
+import { Formik, Field, Form } from 'formik';
+import * as Yup from 'yup';
+import { ErrorMessage } from 'formik';
+
+//Criando esquema de validação
+const validationSchema = Yup.object().shape({
+  txtName: Yup.string().required('Insira o nome do pombo'),
+  txtAge: Yup.string().required('Insira a idade do pombo'),
+  cmbUF: Yup.string().required('Insira a localização do pombo')
+})
 
 function Update() {
   const navigate = useNavigate();
@@ -23,88 +33,65 @@ function Update() {
     })
   }, [])
 
-  // function handleInputChange(event) {
-  //   data[event.target.name] = event.target.value;
-  //   setData(data);
-  // }
-
-  function handleFormSubmit(event) {
-    event.preventDefault();
-    axios.put(`http://localhost:3001/update_pombo/${id}`, data[0]).then(
-      alert(`Pombo atualizado com sucesso!`),
-      navigate('/read')
-  ).catch((err)=>alert("Algo deu errado."))
-  }
-
   return (
     <div className='container-fluid bg-primary vh-100 vw-100'>
       {data.map((pombo) => {
         return (
           <div>
             <Link className='btn btn-success' to='/read'>Voltar</Link>
-            <center><h1>Editando pombo {id}</h1></center>
-          <form onSubmit={handleFormSubmit}>
-            <div className='form-group my-3'>
-              <label>Nome: </label>
-              <input 
-              value={pombo.name} 
-              type="text" 
-              name='txtName' 
-              required 
-              onChange={(e) =>{
-                setData([{...data[0], name: e.target.value}])
-              }} 
-              />
-            </div>
-            <div className='form-group my-3'>
-              <label>Idade: </label>
-              <input 
-              value={pombo.age} 
-              type="number" 
-              name='txtAge' 
-              required 
-              onChange={(e) =>{
-                setData([{...data[0], age: e.target.value}])
-              }}  
-              />
-            </div>
-            <div className='form-group my-3'>
-              <label>UF:
-                <select name="cmbUF" id="cmbUF" required onChange={(e) =>{setData([{...data[0], uf: e.target.value}])}} >
-                  <option value={pombo.uf}>UF Anterior: {pombo.uf}</option>
-                  {estados.map(estado => (<option key={estado.sigla} value={estado.sigla}>{estado.sigla}</option>))}
-                </select>
-              </label>
-            </div>
-            <div className='form-group my-3'>
-              <label>Tipo: </label>
-              <input 
-              value={pombo.type} 
-              type="text" 
-              name='txtType' 
-              onChange={(e) =>{
-                setData([{...data[0], type: e.target.value}])
-              }} 
-              />
-            </div>
-            <div className='form-group my-3'>
-              <label>Photo: </label>
-              <input 
-              type="file" 
-              name='txtPhoto' 
-              onChange={(e) =>{
-                setData([{...data[0], photo: e.target.value}])
-              }} 
-              />
-            </div>
-            <div className='form-group my-3'>
-              <input 
-              type="submit" 
-              value="Salvar" 
-              className='btn btn-success' 
-              />
-            </div>
-          </form>
+            <center><h1>Editando {String(pombo.name)}</h1></center>
+            <Formik
+              initialValues={{
+                txtName: pombo.name,
+                txtAge: pombo.age,
+                cmbUF: pombo.uf,
+                txtType: pombo.type,
+                txtPhoto: pombo.photo
+              }}
+              onSubmit={values => {
+                axios.put(`http://localhost:3001/update_pombo/${id}`, values).then(
+                  alert(`Pombo atualizado com sucesso!`),
+                  navigate('/read')
+                ).catch((err) => {
+                  alert("Algo deu errado.");
+                })
+              }}
+              validationSchema={validationSchema}
+            >
+              {({ handleSubmit }) => (
+                <Form onSubmit={handleSubmit}>
+                  <div className='form-group my-3'>
+                    <label>*Nome: </label>
+                    <Field type="text" name="txtName"></Field>
+                    <ErrorMessage name="txtName" component="div" className="error"></ErrorMessage>
+                  </div>
+                  <div className='form-group my-3'>
+                    <label>*Idade: </label>
+                    <Field type="number" name="txtAge"></Field>
+                    <ErrorMessage name="txtAge" component="div" className="error"></ErrorMessage>
+                  </div>
+                  <div className='form-group my-3'>
+                    <label>*UF: </label>
+                    <Field as="select" name="cmbUF">
+                      <option value={pombo.uf}>Opção anterior: {pombo.uf}</option>
+                      {estados.map(estado => (<option key={estado.sigla} value={estado.sigla}>{estado.sigla}</option>))}
+                    </Field>
+                    <ErrorMessage name="cmbUF" component="div" className="error"></ErrorMessage>
+                  </div>
+                  <div className='form-group my-3'>
+                    <label>Tipo: </label>
+                    <Field type="text" name="txtType"></Field>
+                  </div>
+                  <div className='form-group my-3'>
+                    <label>Photo: </label>
+                    <Field type="file" name="txtphoto"></Field>
+                  </div>
+                  <div className='form-group my-3'>
+                    <button type="submit" className='btn btn-success'>Salvar</button>
+                  </div>
+                </Form>
+              )}
+            </Formik>
           </div>
         )
       })}

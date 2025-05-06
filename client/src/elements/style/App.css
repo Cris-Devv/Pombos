@@ -1,0 +1,106 @@
+/* página home */
+@font-face {
+    font-family: "Forum", serif;
+    src: url('https://fonts.googleapis.com/css2?family=Forum&display=swap');
+  }
+
+.app {
+    margin: 0;
+    padding: 0;
+}
+
+.bg {
+    background-image: url('../../imgs/fundo.jpeg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 100%;
+}
+
+.logo {
+    display: block;
+    width: 304px;
+    height: 304px;
+    margin-top: 120px;
+    margin-left: 250px;
+}
+
+.text {
+    font-size: 30px;
+    font-family: "Forum", serif;
+    margin-top: -80px;
+    margin-left: 323px;
+    color: #545454;
+}
+
+.botao {
+    text-decoration: none;
+    color: #545454;
+    background-color: #b9b8b8;
+    border: none;
+    padding: 10px;
+    text-align: center;
+    display: inline-block;
+    font-size: 13px;
+    margin: 18px 14px;
+    border-radius: 38px;
+    position: absolute;
+    top: 0;
+    right: 0;
+    transition: 0.3s;
+}
+
+.botao:hover {
+    color: #ffffff;
+    background-color: #727171;
+}
+
+/* página header */
+.logoH {
+    width: 100px;
+    height: 100px;
+}
+
+.title {
+    text-align: center;
+    margin-top: -80px;
+}
+/* página read */
+
+.botao2 {
+    text-decoration: none;
+    color: #545454;
+    background-color: #b9b8b8;
+    border: none;
+    padding: 10px;
+    text-align: center;
+    display: inline-block;
+    font-size: 13px;
+    margin: 14px 14px;
+    border-radius: 38px;
+    transition: 0.3s;
+}
+
+.botao2:hover {
+    color: #ffffff;
+    background-color: #727171;
+}
+
+.botao3 {
+    text-decoration: none;
+    color: #545454;   transition: 0.3s;
+    background-color: #b9b8b8;
+    border: none;
+    padding: 10px;
+    text-align: center;
+    display: inline-block;
+    font-size: 13px;
+    border-radius: 38px;
+    width: 70px;
+    transition: 0.3s;
+}
+
+.botao3:hover {
+    color: #ffffff;
+    background-color: #727171;
+}

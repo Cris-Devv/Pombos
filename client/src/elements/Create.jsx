@@ -18,14 +18,14 @@ function Create() {
     const navigate = useNavigate();
     const [estados, setEstados] = useState([]);
 
-//Configurando API do IBGE
+    //Configurando API do IBGE
     useEffect(() => {
         axios.get('https://servicodados.ibge.gov.br/api/v1/localidades/estados').then(res => {
             setEstados(res.data);
         })
     }, [])
 
-//Forms
+    //Forms
     return (
         <div className='container-fluid bg-primary vh-100 vw-100'>
             <div className='row'>
@@ -38,8 +38,8 @@ function Create() {
                         txtName: '',
                         txtAge: '',
                         cmbUF: '',
-                        txtType: '',
-                        txtPhoto: '../../imgs/default-avatar-icon-of-social-media-user-vector.jpg'
+                        txtType: 'Indefinido',
+                        txtPhoto: '../imgs/avatar_default.jpg'
                     }}
                     onSubmit={values => {
                         axios.post('http://localhost:3001/add_pombo', values).then(
@@ -50,39 +50,39 @@ function Create() {
                         })
                     }}
                     validationSchema={validationSchema}
-                    >
-                        {({handleSubmit}) => (
-                    <Form onSubmit={handleSubmit}>
-                        <div className='form-group my-3'>
-                            <label>*Nome: </label>
-                            <Field type="text" name="txtName"></Field>
-                            <ErrorMessage name="txtName" component="div" className="error"></ErrorMessage>
-                        </div>
-                        <div className='form-group my-3'>
-                            <label>*Idade: </label>
-                            <Field type="number" name="txtAge"></Field>
-                            <ErrorMessage name="txtAge" component="div" className="error"></ErrorMessage>
-                        </div>
-                        <div className='form-group my-3'>
-                            <label>*UF: </label>
+                >
+                    {({ handleSubmit }) => (
+                        <Form onSubmit={handleSubmit}>
+                            <div className='form-group my-3'>
+                                <label>*Nome: </label>
+                                <Field type="text" name="txtName"></Field>
+                                <ErrorMessage name="txtName" component="div" className="error"></ErrorMessage>
+                            </div>
+                            <div className='form-group my-3'>
+                                <label>*Idade: </label>
+                                <Field type="number" name="txtAge"></Field>
+                                <ErrorMessage name="txtAge" component="div" className="error"></ErrorMessage>
+                            </div>
+                            <div className='form-group my-3'>
+                                <label>*UF: </label>
                                 <Field as="select" name="cmbUF">
-                                    <option value="0">Selecione uma opção</option>
+                                    <option value="">Selecione uma opção</option>
                                     {estados.map(estado => (<option key={estado.sigla} value={estado.sigla}>{estado.sigla}</option>))}
                                 </Field>
                                 <ErrorMessage name="cmbUF" component="div" className="error"></ErrorMessage>
-                        </div>
-                        <div className='form-group my-3'>
-                            <label>Tipo: </label>
-                            <Field type="text" name="txtType"></Field>
-                        </div>
-                        <div className='form-group my-3'>
-                            <label>Photo: </label>
-                            <Field type="file" name="txtphoto"></Field>
-                        </div>
-                        <div className='form-group my-3'>
-                            <button type="submit" className='btn btn-success'>Cadastrar</button>
-                        </div>
-                    </Form>
+                            </div>
+                            <div className='form-group my-3'>
+                                <label>Tipo: </label>
+                                <Field type="text" name="txtType" value=""></Field>
+                            </div>
+                            <div className='form-group my-3'>
+                                <label>Photo: </label>
+                                <Field type="file" name="txtphoto"></Field>
+                            </div>
+                            <div className='form-group my-3'>
+                                <button type="submit" className='btn btn-success'>Cadastrar</button>
+                            </div>
+                        </Form>
                     )}
                 </Formik>
             </div>

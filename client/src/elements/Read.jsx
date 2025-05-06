@@ -1,6 +1,8 @@
   import React, {useEffect, useState} from 'react'
   import axios from 'axios'
   import {Link} from 'react-router-dom'
+  import Header from './Header'
+  import './style/App.css'
 
 function Read() {
   const [data, setData] = useState([]);
@@ -15,10 +17,10 @@ function Read() {
   }, [])
 
   return (
-    <div className='container-fluid bg-primary vh-100 vw-100'>
-      <center><h1>Pombos cadastrados</h1></center>
+    <div class='app'>
+      <Header title="Pombos cadastrados" />
       <div className='d-flex justify-content-end'>
-        <Link className='btn btn-success' to='/create'>Cadastrar pombo</Link>
+        <Link class='botao' to='/create'>Cadastrar pombo</Link>
       </div>
       <table>
         <thead>
@@ -37,8 +39,8 @@ function Read() {
                 <td><center>{pombo.age}</center></td>
                 <td>{pombo.uf}</td>
                 <td>
-                  <Link className='btn btn-success' to={`/detail/${pombo.id}`}>Detalhes</Link>
-                  <Link className='btn btn-success' to={`/update/${pombo.id}`}>Editar</Link>
+                  <Link class='botao2' to={`/detail/${pombo.id}`}>Detalhes</Link>
+                  <Link class='botao3' to={`/update/${pombo.id}`}>Editar</Link>
                 </td>
               </tr>)
             })

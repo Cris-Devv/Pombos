@@ -27,11 +27,11 @@ function Details() {
 
   return (
     <div className='container-fluid bg-primary vh-100 vw-100'>
-      <center><h1>Detalhes do pombo {id}</h1></center>
-      <Link className='btn btn-success' to='/read'>Voltar</Link>
       {data.map((pombo) => {
         return (
           <div>
+            <Link className='btn btn-success' to='/read'>Voltar</Link>
+            <center><h1>Detalhes de {pombo.name}</h1></center>
             <ul className='list-group'>
               <li className='list-group-item'>
                 <b>ID: </b>

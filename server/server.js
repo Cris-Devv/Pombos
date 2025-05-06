@@ -69,11 +69,13 @@
                 const connect = await database.sync();
                 console.log('Conectado com sucesso!');
 
-                const {id} = req.params;
-                const {name, age, uf, type, photo} = req.body;
                 const pomboUpdate = await Pombo.update(
-                    {name, age, uf, type, photo}, 
-                    {where: {id: id,},
+                    {name: req.body.txtName, 
+                    age: req.body.txtAge, 
+                    uf: req.body.cmbUF, 
+                    type: req.body.txtType, 
+                    photo: req.body.txtPhoto}, 
+                    {where: {id: req.params.id}
                 });
                 console.log("Pombo atualizado com sucesso!");
             } catch (err) {

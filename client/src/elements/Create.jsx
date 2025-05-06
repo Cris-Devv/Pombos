@@ -35,25 +35,26 @@ function Create() {
                 </div>
                 <Formik
                     initialValues={{
-                        txtName: '',
-                        txtAge: '',
-                        cmbUF: '',
-                        txtType: 'Indefinido',
-                        txtPhoto: '../imgs/avatar_default.jpg'
+                        // txtName: '',
+                        // txtAge: '',
+                        // cmbUF: '',
+                        // txtType: 'Indefinida',
+                        txtPhoto: ''
                     }}
                     onSubmit={values => {
-                        axios.post('http://localhost:3001/add_pombo', values).then(
-                            alert(`Pombo cadastrado com sucesso!`),
-                            navigate('/read')
-                        ).catch((err) => {
-                            alert("Algo deu errado.");
-                        })
+                        // axios.post('http://localhost:3001/add_pombo', values).then(
+                        //     alert(`Pombo cadastrado com sucesso!`),
+                        //     navigate('/read')
+                        // ).catch((err) => {
+                        //     alert("Algo deu errado.");
+                        // })
+                        console.log(values)
                     }}
-                    validationSchema={validationSchema}
+                    // validationSchema={validationSchema}
                 >
                     {({ handleSubmit }) => (
                         <Form onSubmit={handleSubmit}>
-                            <div className='form-group my-3'>
+                            {/* <div className='form-group my-3'>
                                 <label>*Nome: </label>
                                 <Field type="text" name="txtName"></Field>
                                 <ErrorMessage name="txtName" component="div" className="error"></ErrorMessage>
@@ -72,12 +73,12 @@ function Create() {
                                 <ErrorMessage name="cmbUF" component="div" className="error"></ErrorMessage>
                             </div>
                             <div className='form-group my-3'>
-                                <label>Tipo: </label>
+                                <label>Espécie: </label>
                                 <Field type="text" name="txtType" value=""></Field>
-                            </div>
+                            </div> */}
                             <div className='form-group my-3'>
-                                <label>Photo: </label>
-                                <Field type="file" name="txtphoto"></Field>
+                                <label>Foto: </label>
+                                <Field type="file" name="txtPhoto"></Field>
                             </div>
                             <div className='form-group my-3'>
                                 <button type="submit" className='btn btn-success'>Cadastrar</button>

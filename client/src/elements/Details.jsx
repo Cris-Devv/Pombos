@@ -50,7 +50,7 @@ function Details() {
                 {pombo['uf']}
               </li>
               <li className='list-group-item'>
-                <b>Tipo: </b>
+                <b>Espécie: </b>
                 {pombo['type']}
               </li>
               {/* <li className='list-group-item'>

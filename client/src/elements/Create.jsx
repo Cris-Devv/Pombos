@@ -38,8 +38,8 @@ function Create() {
                         txtName: '',
                         txtAge: '',
                         cmbUF: '',
-                        txtType: '',
-                        txtPhoto: ''
+                        txtType: ''
+                        //txtPhoto: ''
                     }}
                     onSubmit={values => {
                         if (values.txtType === ''){

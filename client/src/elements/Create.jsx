@@ -27,12 +27,13 @@ function Create() {
         })
     }, [])
 
-//Forms
+//Criação do Forms
     return (
         <div class='app'>
             <Header title='Cadastrar Pombo'/>
             <Link to='/read' class='botao'>Pombos cadastrados</Link>
             <div class='screen'>
+//Utilização da biblioteca Formik para criação do Forms
                 <Formik
                     initialValues={{
                         txtName: '',

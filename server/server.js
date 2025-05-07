@@ -22,8 +22,8 @@
                     name: req.body.txtName,
                     age: parseInt(req.body.txtAge),
                     uf: req.body.cmbUF,
-                    type: req.body.txtType,
-                    photo: req.body.txtPhoto
+                    type: req.body.txtType
+                    // photo: req.body.txtPhoto
                 })
                 console.log("Pombo adicionado com sucesso");
 
@@ -73,8 +73,8 @@
                     {name: req.body.txtName, 
                     age: req.body.txtAge, 
                     uf: req.body.cmbUF, 
-                    type: req.body.txtType, 
-                    photo: req.body.txtPhoto}, 
+                    type: req.body.txtType}, 
+                    // photo: req.body.txtPhoto 
                     {where: {id: req.params.id}
                 });
                 console.log("Pombo atualizado com sucesso!");

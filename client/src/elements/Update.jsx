@@ -82,10 +82,10 @@ function Update() {
                     <label>Tipo: </label>
                     <Field type="text" name="txtType"></Field>
                   </div>
-                  <div className='form-group my-3'>
+                  {/* <div className='form-group my-3'>
                     <label>Photo: </label>
                     <Field type="file" name="txtphoto"></Field>
-                  </div>
+                  </div> */}
                   <div className='form-group my-3'>
                     <button type="submit" className='btn btn-success'>Salvar</button>
                   </div>

@@ -35,26 +35,28 @@ function Create() {
                 </div>
                 <Formik
                     initialValues={{
-                        // txtName: '',
-                        // txtAge: '',
-                        // cmbUF: '',
-                        // txtType: 'Indefinida',
+                        txtName: '',
+                        txtAge: '',
+                        cmbUF: '',
+                        txtType: '',
                         txtPhoto: ''
                     }}
                     onSubmit={values => {
-                        // axios.post('http://localhost:3001/add_pombo', values).then(
-                        //     alert(`Pombo cadastrado com sucesso!`),
-                        //     navigate('/read')
-                        // ).catch((err) => {
-                        //     alert("Algo deu errado.");
-                        // })
-                        console.log(values)
+                        if (values.txtType === ''){
+                            values.txtType = 'Indefinida'
+                        }
+                        axios.post('http://localhost:3001/add_pombo', values).then(
+                            alert(`Pombo cadastrado com sucesso!`),
+                            navigate('/read')
+                        ).catch((err) => {
+                            alert("Algo deu errado.");
+                        })
                     }}
-                    // validationSchema={validationSchema}
+                    validationSchema={validationSchema}
                 >
                     {({ handleSubmit }) => (
                         <Form onSubmit={handleSubmit}>
-                            {/* <div className='form-group my-3'>
+                            <div className='form-group my-3'>
                                 <label>*Nome: </label>
                                 <Field type="text" name="txtName"></Field>
                                 <ErrorMessage name="txtName" component="div" className="error"></ErrorMessage>
@@ -74,8 +76,8 @@ function Create() {
                             </div>
                             <div className='form-group my-3'>
                                 <label>Espécie: </label>
-                                <Field type="text" name="txtType" value=""></Field>
-                            </div> */}
+                                <Field type="text" name="txtType"></Field>
+                            </div>
                             <div className='form-group my-3'>
                                 <label>Foto: </label>
                                 <Field type="file" name="txtPhoto"></Field>

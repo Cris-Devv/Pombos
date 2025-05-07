@@ -37,6 +37,7 @@ function Read() {
         </thead>
         <tbody>
           {data.map((pombo)=>{
+//data.map utilizado para implementar dados do banco na variável pombo
               return (<tr>
                 <td>{pombo.id}</td>
                 <td>{pombo.name}</td>
@@ -55,4 +56,5 @@ function Read() {
   )
 }
 
+//Exportando página Read
 export default Read

@@ -12,6 +12,8 @@
     app.use(express.static(path.join(__dirname, "public")));
 
 //Rotas    
+
+//Rota Create
     app.post('/add_pombo', (req, res, next) => {
         (async () => {
             try {
@@ -33,6 +35,7 @@
         })();
     })
 
+//Rota Read
     app.get('/pombos', (req, res, next) => {
         (async () => {
             try{
@@ -48,6 +51,7 @@
         })();
     })
 
+//Rota Read por ID
     app.get('/get_pombo/:id', (req, res, next) => {
         (async () => {
             try{
@@ -63,6 +67,7 @@
         })();
     })
 
+//Rota Update
     app.put('/update_pombo/:id', (req, res, next) => {
         (async () => {
             try {
@@ -84,6 +89,7 @@
         })();
     })
 
+//Rota Delete
     app.delete('/delete/:id', (req, res, next) => {
         (async() => {
             const connect = await database.sync();

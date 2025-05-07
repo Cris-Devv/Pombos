@@ -37,6 +37,7 @@ function Read() {
         </thead>
         <tbody>
 //data.map utilizado para implementar dados do banco na variável pombo
+
           {data.map((pombo)=>{
               return (<tr>
                 <td>{pombo.id}</td>

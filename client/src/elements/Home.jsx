@@ -1,9 +1,11 @@
+//Importando dependências
 import React from 'react'
 import logo from '../imgs/logo.png'
 import Header from './Header'
 import "./style/App.css"
 import { Link } from 'react-router-dom'
 
+//Criação da página Home
 function Home() {
   return (
     <div class="app">
@@ -17,4 +19,5 @@ function Home() {
   )
 }
 
+//Exportação do módulo Home
 export default Home

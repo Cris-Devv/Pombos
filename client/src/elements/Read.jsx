@@ -11,7 +11,8 @@ function Read() {
   const [data, setData] = useState([]); //Definindo variáveis para pesquisa de dados
    
   useEffect(()=>{
-//Usando rota get para buscar dados no Banco axios.get('http://localhost:3001/pombos').then((res)=>{
+//Usando rota get para buscar dados no Banco
+ axios.get('http://localhost:3001/pombos').then((res)=>{
       setData(res.data);
     })
     .catch((err)=>{

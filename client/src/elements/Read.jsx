@@ -5,9 +5,13 @@
   import Header from './Header'
   import './style/App.css'
 
+//Criação da página Read
 function Read() {
-  const [data, setData] = useState([]);
+
+  const [data, setData] = useState([]); //Definindo variáveis para pesquisa de dados
   
+//Usando rota get para buscar dados no Banco de dados
+
   useEffect(()=>{
     axios.get('http://localhost:3001/pombos').then((res)=>{
       setData(res.data);
@@ -33,6 +37,7 @@ function Read() {
           </tr>
         </thead>
         <tbody>
+//data.map utilizado para implementar dados do banco na variável pombo
           {data.map((pombo)=>{
               return (<tr>
                 <td>{pombo.id}</td>

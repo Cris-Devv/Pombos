@@ -33,7 +33,7 @@ function Create() {
             <Header title='Cadastrar Pombo'/>
             <Link to='/read' class='botao'>Pombos cadastrados</Link>
             <div class='screen'>
-//Utilização da biblioteca Formik para criação do Forms
+// Utilização da Formik para criação do Forms
                 <Formik
                     initialValues={{
                         txtName: '',

@@ -15,19 +15,19 @@ const validationSchema = Yup.object().shape({
     cmbUF: Yup.string().required('Insira a localização do pombo')
 })
 
-//Configurando valores padrões do Forms
 function Create() {
+//Configurando navegação 
     const navigate = useNavigate();
-    const [estados, setEstados] = useState([]);
 
-    //Configurando API do IBGE
+//Configurando API do IBGE
+    const [estados, setEstados] = useState([]);
     useEffect(() => {
         axios.get('https://servicodados.ibge.gov.br/api/v1/localidades/estados').then(res => {
             setEstados(res.data);
         })
     }, [])
 
-    //Forms
+//Forms
     return (
         <div class='app'>
             <Header title='Cadastrar Pombo'/>

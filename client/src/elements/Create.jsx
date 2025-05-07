@@ -27,14 +27,14 @@ function Create() {
         })
     }, [])
 
-//Criação do Forms
+//Criação do Forms com Formik
     return (
         <div class='app'>
             <Header title='Cadastrar Pombo'/>
             <Link to='/read' class='botao'>Pombos cadastrados</Link>
             <div class='screen'>
                 <Formik
-// Utilização da biblioteca Formik para criação do Forms
+//Definindo valores iniciais
                     initialValues={{
                         txtName: '',
                         txtAge: '',
@@ -96,4 +96,5 @@ function Create() {
     )
 }
 
+//Exportação da página Create
 export default Create

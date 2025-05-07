@@ -19,5 +19,5 @@ function Home() {
   )
 }
 
-//Exportação do módulo Home
+//Exportação da página Home
 export default Home

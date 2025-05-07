@@ -4,6 +4,8 @@ import { Link, useParams, useNavigate } from 'react-router-dom';
 import { Formik, Field, Form } from 'formik';
 import * as Yup from 'yup';
 import { ErrorMessage } from 'formik';
+import Header from './Header';
+import './style/App.css';
 
 //Criando esquema de validação
 const validationSchema = Yup.object().shape({
